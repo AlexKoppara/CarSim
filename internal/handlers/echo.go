@@ -1,4 +1,4 @@
-package internal
+package handlers
 
 import (
 	"log"
@@ -9,7 +9,9 @@ import (
 
 var upgrader = websocket.Upgrader{}
 
-func echo(w http.ResponseWriter, r *http.Request) {
+// Echo endpoint
+func Echo(w http.ResponseWriter, r *http.Request) {
+	upgrader.CheckOrigin = func(r *http.Request) bool { return true }
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println("read:", err)
