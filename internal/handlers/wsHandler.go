@@ -9,6 +9,8 @@ import (
 
 // WsHandler adds new upgrader client to client map
 func WsHandler(w http.ResponseWriter, r *http.Request, clients map[*websocket.Conn]bool, upgrader *websocket.Upgrader) {
+	log.Print("test2")
+
 	ws, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Fatal(err)

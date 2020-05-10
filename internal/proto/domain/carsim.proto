@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package domain;
+
+option go_package = "github.com/AlexKoppara/CarSim/internal/gRPC/domain";
+
+message Car {
+  int64 id = 1;
+  string name = 2;
+}

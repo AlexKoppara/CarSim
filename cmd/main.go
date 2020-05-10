@@ -19,7 +19,16 @@ func main() {
 	}
 
 	r := mux.NewRouter()
-	r.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) { handlers.WsHandler(w, r, clients, upgrader) })
+	r.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
+		log.Print("test")
+		handlers.WsHandler(w, r, clients, upgrader)
+	})
+
+	r.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(200)
+		w.Write([]byte("healthy"))
+	})
 
 	go echo.Echo(clients)
 
