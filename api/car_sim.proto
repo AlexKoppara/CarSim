@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package = "github.com/AlexKoppara/CarSim/api";
+
+package api;
+
+// Interface exported by server
+service CarSim {
+  // A simple RPC.
+  //
+  // Create a new Car
+  rpc CreateCar(CarInfo) returns (Point) {}
+
+
+  // A server side streaming RPC.
+  //
+  // Accepts an AccVector
+  // Returns stream of location data
+  rpc DriveCar(AccVector) returns (stream Point) {}
+}
+
+// CarInfo is all the info needed to create a Car
+message CarInfo {
+  int64 id = 1;
+  string name = 2;
+}
+
+// AccVector defines X and Y acceleration from client
+message AccVector {
+  float Ax = 1;
+  float Ay = 2;
+}
+
+// Point is location data
+message Point {
+  float lat = 1;
+  float long = 2;
+}
